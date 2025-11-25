@@ -1,7 +1,7 @@
 package cfdutil
 
 import (
-	"github.com/harry1453/go-common-file-dialog/cfd"
+	"github.com/huca124/go-common-file-dialog/cfd"
 )
 
 // TODO doc
@@ -17,6 +17,16 @@ func ShowOpenFileDialog(config cfd.DialogConfig) (string, error) {
 // TODO doc
 func ShowOpenMultipleFilesDialog(config cfd.DialogConfig) ([]string, error) {
 	dialog, err := cfd.NewOpenMultipleFilesDialog(config)
+	if err != nil {
+		return nil, err
+	}
+	defer dialog.Release()
+	return dialog.ShowAndGetResults()
+}
+
+// TODO doc
+func ShowOpenMultipleFoldersDialog(config cfd.DialogConfig) ([]string, error) {
+	dialog, err := cfd.NewSelectMultipleFoldersDialog(config)
 	if err != nil {
 		return nil, err
 	}

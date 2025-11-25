@@ -1,3 +1,4 @@
+//go:build windows
 // +build windows
 
 package cfd
@@ -57,6 +58,27 @@ func NewSelectFolderDialog(config DialogConfig) (SelectFolderDialog, error) {
 	}
 	err = openDialog.setPickFolders(true)
 	if err != nil {
+		return nil, err
+	}
+	return openDialog, nil
+}
+
+func NewSelectMultipleFoldersDialog(config DialogConfig) (SelectMultipleFoldersDialog, error) {
+	initialize()
+
+	openDialog, err := newIFileOpenDialog()
+	if err != nil {
+		return nil, err
+	}
+	err = config.apply(openDialog)
+	if err != nil {
+		return nil, err
+	}
+	err = openDialog.setPickFolders(true)
+	if err != nil {
+		return nil, err
+	}
+	if err := openDialog.setIsMultiselect(true); err != nil {
 		return nil, err
 	}
 	return openDialog, nil

@@ -1,3 +1,4 @@
+//go:build !windows
 // +build !windows
 
 package cfd
@@ -18,6 +19,10 @@ func NewOpenMultipleFilesDialog(config DialogConfig) (OpenMultipleFilesDialog, e
 
 // TODO doc
 func NewSelectFolderDialog(config DialogConfig) (SelectFolderDialog, error) {
+	return nil, unsupportedError
+}
+
+func NewSelectMultipleFoldersDialog(config DialogConfig) (SelectMultipleFoldersDialog, error) {
 	return nil, unsupportedError
 }
 

@@ -67,6 +67,15 @@ type SelectFolderDialog interface {
 	Dialog
 }
 
+type SelectMultipleFoldersDialog interface {
+	Dialog
+	// ShowAndGetResults shows the dialog to the user.
+	// Blocks until the user has closed the dialog and returns the selected files.
+	ShowAndGetResults() ([]string, error)
+	// GetResults returns the selected file paths, as absolute paths eg. "C:\Folder\file.txt"
+	GetResults() ([]string, error)
+}
+
 type SaveFileDialog interface { // TODO Properties
 	FileDialog
 }
